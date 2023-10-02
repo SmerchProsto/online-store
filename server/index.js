@@ -5,7 +5,18 @@ const sequelize = require('./db'); // import (ORM) object from db.js(which creat
 const models = require('./models/models'); // import all models
 const cors = require('cors');
 
-const PORT = process.env.PORT || 3000;
+//for upload files like img
+const fileUpload = require('express-fileupload');
+
+// import main router, which tie into one
+const router = require('./routes/index');
+
+// register a error
+const errorHandler = require('./middleware/ErrorHandlingMiddleware');
+
+const path = require('path');
+
+const PORT = process.env.PORT || 5000;
 
 const app = express(); // created object
 
@@ -13,13 +24,26 @@ const app = express(); // created object
 app.use(cors());
 
 // for parsing json format
-app.use(express.json);
+app.use(express.json());
+
+//access to static
+app.use(express.static(path.resolve(__dirname, 'static')));
+
+//register file-upload for our server
+app.use(fileUpload({}));
+
+app.use('/api', router);
+
+// !important middleware, which work with errors must be in the end app.use chain
+app.use(errorHandler);
+
+
 
 // 1 argument - URL, 2 argument - callback, where request and response(Ответ)
-app.get('/', (req, res) => {
-    //http args: 200 - all is ok.
+/*app.get('/', (req, res) => {
+    // http args: 200 - all is ok.
     res.status(200).json({message: 'Working!!!'})
-})
+})*/
 
 
 // function to connect to db. Its async because all requests must be like that
