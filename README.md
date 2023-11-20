@@ -24,11 +24,11 @@ The application is a full-fledged client-server architecture.
 - Pagination
 - Sorting products by brands, types
 
-![img.png](img.png)
+![img.png](client/img.png)
 
-![img_1.png](img_1.png)
-![img_2.png](img_2.png)
-![img_3.png](img_3.png)
-![img_4.png](img_4.png)
+![img_1.png](client/img_1.png)
+![img_2.png](client/img_2.png)
+![img_3.png](client/img_3.png)
+![img_4.png](client/img_4.png)
 
 sql database and er-model in "db-data" folder
